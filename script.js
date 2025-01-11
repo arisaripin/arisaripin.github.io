@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return {
             x: x || Math.random() * canvas.width,
             y: y || Math.random() * canvas.height,
-            size: Math.random() * 2 + 1, // Random size between 1 and 3
+            size: 2, // Fixed size for all stars
             twinkling: twinkling,
             opacity: Math.random()
         };
@@ -121,6 +121,35 @@ document.addEventListener('DOMContentLoaded', () => {
             cursorStars.push({
                 x: e.clientX,
                 y: e.clientY,
+                size: Math.random() * 2,
+                opacity: 1,
+                vx: (Math.random() - 0.5) * 10,
+                vy: (Math.random() - 0.5) * 10
+            });
+        }
+    });
+
+    // Add touch event listeners
+    canvas.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        for (let i = 0; i < 5; i++) {
+            cursorStars.push({
+                x: touch.clientX,
+                y: touch.clientY,
+                size: Math.random() * 2,
+                opacity: 1,
+                vx: (Math.random() - 0.5) * 5,
+                vy: (Math.random() - 0.5) * 5
+            });
+        }
+    });
+
+    canvas.addEventListener('touchstart', (e) => {
+        const touch = e.touches[0];
+        for (let i = 0; i < 20; i++) {
+            cursorStars.push({
+                x: touch.clientX,
+                y: touch.clientY,
                 size: Math.random() * 2,
                 opacity: 1,
                 vx: (Math.random() - 0.5) * 10,
